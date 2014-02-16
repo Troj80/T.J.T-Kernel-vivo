@@ -144,7 +144,7 @@ config CPU_FREQ_GOV_SMARTASSH3
 	help
 		SmartassH3 - a "smartassV2 with tweaks by H3ROS" governor!
 
-	If in doubt, say Y.
+#	  If in doubt, say Y.
 
 config CPU_FREQ_GOV_PERFORMANCE
 	tristate "'performance' governor"
