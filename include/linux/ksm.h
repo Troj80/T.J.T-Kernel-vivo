@@ -12,7 +12,6 @@
 #include <linux/pagemap.h>
 #include <linux/rmap.h>
 #include <linux/sched.h>
-#include <linux/uksm.h>
 
 struct stable_node;
 struct mem_cgroup;
@@ -154,5 +153,7 @@ static inline void ksm_migrate_page(struct page *newpage, struct page *oldpage)
 }
 #endif /* CONFIG_MMU */
 #endif /* !CONFIG_KSM */
+
+#include <linux/uksm.h>
 
 #endif /* __LINUX_KSM_H */
