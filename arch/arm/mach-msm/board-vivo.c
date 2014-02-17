@@ -126,7 +126,7 @@ int htc_get_usb_accessory_adc_level(uint32_t *buffer);
 
 #define GPS_EN_GPIO -1
 
-#define PMIC_VREG_WLAN_LEVEL	2900
+#define PMIC_VREG_WLAN_LEVEL	2100
 
 #define ADV7520_I2C_ADDR	0x39
 
