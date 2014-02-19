@@ -47,6 +47,10 @@
 #define BLIT_TIME 0x4
 #define SHOW_UPDATES 0x8
 
+#ifdef CONFIG_FB_MSM_TRIPLE_BUFFER
+#define MSM_FB_NUM	3
+#endif
+
 #define DLOG(mask, fmt, args...) \
 do { \
 	if (msmfb_debug_mask & mask) \
