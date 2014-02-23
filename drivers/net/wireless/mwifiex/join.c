@@ -1104,7 +1104,7 @@ mwifiex_cmd_802_11_ad_hoc_join(struct mwifiex_private *priv,
 
 	for (i = 0; i < MWIFIEX_SUPPORTED_RATES &&
 		    bss_desc->supported_rates[i]; i++)
-			;
+		;
 	rates_size = i;
 
 	/* Copy Data Rates from the Rates recorded in scan response */
