@@ -566,7 +566,6 @@ int ftrace_profile_pages_init(struct ftrace_profile_stat *stat)
 		free_page(tmp);
 	}
 
-	free_page((unsigned long)stat->pages);
 	stat->pages = NULL;
 	stat->start = NULL;
 
@@ -3441,7 +3440,7 @@ static int ftrace_module_notify_enter(struct notifier_block *self,
 		ftrace_init_module(mod, mod->ftrace_callsites,
 				   mod->ftrace_callsites +
 				   mod->num_ftrace_callsites);
-return 0;
+	return 0;
 }
 
 static int ftrace_module_notify_exit(struct notifier_block *self,
@@ -3934,7 +3933,7 @@ ftrace_enable_sysctl(struct ctl_table *table, int write,
 		ftrace_startup_sysctl();
 
 		/* we are starting ftrace again */
-		iif (ftrace_ops_list != &ftrace_list_end)
+		if (ftrace_ops_list != &ftrace_list_end)
 			update_ftrace_function();
 
 	} else {
