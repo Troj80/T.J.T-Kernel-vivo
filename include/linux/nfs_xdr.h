@@ -594,12 +594,10 @@ struct nfs_getaclargs {
 /* getxattr ACL interface flags */
 #define NFS4_ACL_LEN_REQUEST	0x0001	/* zero length getxattr buffer */
 struct nfs_getaclres {
- 	size_t				acl_len;
+	size_t				acl_len;
 	size_t				acl_data_offset;
 	int				acl_flags;
-struct page *			acl_scratch;
-struct nfs_getaclres {
-	size_t				acl_len;
+	struct page *			acl_scratch;
 	struct nfs4_sequence_res	seq_res;
 };
 
