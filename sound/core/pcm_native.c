@@ -636,7 +636,7 @@ static int snd_pcm_status_user(struct snd_pcm_substream *substream,
 {
 	struct snd_pcm_status status;
 	int res;
-	
+
 	memset(&status, 0, sizeof(status));
 	res = snd_pcm_status(substream, &status);
 	if (res < 0)
@@ -651,7 +651,7 @@ static int snd_pcm_channel_info(struct snd_pcm_substream *substream,
 {
 	struct snd_pcm_runtime *runtime;
 	unsigned int channel;
-	
+
 	channel = info->channel;
 	runtime = substream->runtime;
 	snd_pcm_stream_lock_irq(substream);
@@ -672,7 +672,7 @@ static int snd_pcm_channel_info_user(struct snd_pcm_substream *substream,
 {
 	struct snd_pcm_channel_info info;
 	int res;
-	
+
 	if (copy_from_user(&info, _info, sizeof(info)))
 		return -EFAULT;
 	res = snd_pcm_channel_info(substream, &info);
@@ -763,7 +763,7 @@ static int snd_pcm_action_single(struct action_ops *ops,
 				 int state)
 {
 	int res;
-	
+
 	res = ops->pre_action(substream, state);
 	if (res < 0)
 		return res;
@@ -1540,7 +1540,7 @@ static int snd_pcm_drop(struct snd_pcm_substream *substream)
 {
 	struct snd_pcm_runtime *runtime;
 	int result = 0;
-	
+
 	if (PCM_RUNTIME_CHECK(substream))
 		return -ENXIO;
 	runtime = substream->runtime;
@@ -2437,7 +2437,7 @@ static int snd_pcm_hwsync(struct snd_pcm_substream *substream)
 	snd_pcm_stream_unlock_irq(substream);
 	return err;
 }
-		
+
 static int snd_pcm_delay(struct snd_pcm_substream *substream,
 			 snd_pcm_sframes_t __user *res)
 {
@@ -2477,7 +2477,7 @@ static int snd_pcm_delay(struct snd_pcm_substream *substream,
 			err = -EFAULT;
 	return err;
 }
-		
+
 static int snd_pcm_sync_ptr(struct snd_pcm_substream *substream,
 			    struct snd_pcm_sync_ptr __user *_sync_ptr)
 {
@@ -2522,7 +2522,7 @@ static int snd_pcm_tstamp(struct snd_pcm_substream *substream, int __user *_arg)
 {
 	struct snd_pcm_runtime *runtime = substream->runtime;
 	int arg;
-	
+
 	if (get_user(arg, _arg))
 		return -EFAULT;
 	if (arg < 0 || arg > SNDRV_PCM_TSTAMP_TYPE_LAST)
@@ -2532,7 +2532,7 @@ static int snd_pcm_tstamp(struct snd_pcm_substream *substream, int __user *_arg)
 		runtime->tstamp_type = SNDRV_PCM_TSTAMP_TYPE_MONOTONIC;
 	return 0;
 }
-		
+
 static int snd_pcm_common_ioctl1(struct file *file,
 				 struct snd_pcm_substream *substream,
 				 unsigned int cmd, void __user *arg)
@@ -2794,7 +2794,7 @@ int snd_pcm_kernel_ioctl(struct snd_pcm_substream *substream,
 {
 	mm_segment_t fs;
 	int result;
-	
+
 	fs = snd_enter_user();
 	switch (substream->stream) {
 	case SNDRV_PCM_STREAM_PLAYBACK:
@@ -3032,7 +3032,7 @@ static int snd_pcm_mmap_status_fault(struct vm_area_struct *area,
 {
 	struct snd_pcm_substream *substream = area->vm_private_data;
 	struct snd_pcm_runtime *runtime;
-	
+
 	if (substream == NULL)
 		return VM_FAULT_SIGBUS;
 	runtime = substream->runtime;
@@ -3069,7 +3069,7 @@ static int snd_pcm_mmap_control_fault(struct vm_area_struct *area,
 {
 	struct snd_pcm_substream *substream = area->vm_private_data;
 	struct snd_pcm_runtime *runtime;
-	
+
 	if (substream == NULL)
 		return VM_FAULT_SIGBUS;
 	runtime = substream->runtime;
@@ -3145,7 +3145,7 @@ static int snd_pcm_mmap_data_fault(struct vm_area_struct *area,
 	unsigned long offset;
 	struct page * page;
 	size_t dma_bytes;
-	
+
 	if (substream == NULL)
 		return VM_FAULT_SIGBUS;
 	runtime = substream->runtime;
@@ -3214,18 +3214,10 @@ static int snd_pcm_default_mmap(struct snd_pcm_substream *substream,
 int snd_pcm_lib_mmap_iomem(struct snd_pcm_substream *substream,
 			   struct vm_area_struct *area)
 {
-	long size;
-	unsigned long offset;
+	struct snd_pcm_runtime *runtime = substream->runtime;;
 
 	area->vm_page_prot = pgprot_noncached(area->vm_page_prot);
-	area->vm_flags |= VM_IO;
-	size = area->vm_end - area->vm_start;
-	offset = area->vm_pgoff << PAGE_SHIFT;
-	if (io_remap_pfn_range(area, area->vm_start,
-				(substream->runtime->dma_addr + offset) >> PAGE_SHIFT,
-				size, area->vm_page_prot))
-		return -EAGAIN;
-	return 0;
+	return vm_iomap_memory(area, runtime->dma_addr, runtime->dma_bytes);
 }
 
 EXPORT_SYMBOL(snd_pcm_lib_mmap_iomem);
@@ -3284,7 +3276,7 @@ static int snd_pcm_mmap(struct file *file, struct vm_area_struct *area)
 	struct snd_pcm_file * pcm_file;
 	struct snd_pcm_substream *substream;	
 	unsigned long offset;
-	
+
 	pcm_file = file->private_data;
 	substream = pcm_file->substream;
 	if (PCM_RUNTIME_CHECK(substream))
