@@ -216,8 +216,6 @@ static int vivo_ts_power(int on)
 	pr_info("[TP]%s: power %d\n", __func__, on);
 
 	if (on == 1) {
-		gpio_set_value(VIVO_GPIO_TP_EN, 1);
-		msleep(5);
 		gpio_set_value(PM8058_GPIO_PM_TO_SYS(VIVO_TP_RSTz), 1);
 	} else if (on == 2) {
 		gpio_set_value(PM8058_GPIO_PM_TO_SYS(VIVO_TP_RSTz), 0);
