@@ -246,6 +246,7 @@ static void vivow_backlight_switch(int on)
 		vivow_set_dim = 1;
 	} else {
 		clear_bit(GATE_ON, &cabc.status);
+		if (val != 0)
 		vivow_set_brightness(&cabc.lcd_backlight, 0);
 	}
 }
