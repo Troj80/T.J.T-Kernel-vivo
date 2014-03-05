@@ -20,12 +20,10 @@
 #include <linux/msm_kgsl.h>
 
 #include <mach/socinfo.h>
-#if 0
 #include <mach/msm_bus_board.h>
 #include <mach/msm_bus.h>
 #include <mach/msm_dcvs.h>
 #include <mach/msm_dcvs_scm.h>
-#endif
 
 #include "kgsl.h"
 #include "kgsl_pwrscale.h"
@@ -607,10 +605,8 @@ patchid = ((revid >> 16) & 0xFF);
 /* 8x25 returns 0 for minor id, but it should be 1 */
 if (cpu_is_qsd8x50())
 patchid = 1;
-#ifdef CONFIG_ARCH_MSM8625
 else if (cpu_is_msm8625() && minorid == 0)
 minorid = 1;
-#endif
 
 chipid |= (minorid << 8) | patchid;
 
@@ -689,7 +685,7 @@ static struct of_device_id adreno_match_table[] = {
 };
 
 static inline int adreno_of_read_property(struct device_node *node,
-char *prop, unsigned int *ptr)
+const char *prop, unsigned int *ptr)
 {
 int ret = of_property_read_u32(node, prop, ptr);
 if (ret)
@@ -697,7 +693,6 @@ KGSL_CORE_ERR("Unable to read '%s'\n", prop);
 return ret;
 }
 
-#if 0
 static struct device_node *adreno_of_find_subnode(struct device_node *parent,
 const char *name)
 {
@@ -1098,7 +1093,6 @@ kfree(pdata);
 
 return ret;
 }
-#endif
 
 #ifdef CONFIG_MSM_OCMEM
 static int
@@ -1153,7 +1147,6 @@ adreno_probe(struct platform_device *pdev)
 struct kgsl_device *device;
 struct adreno_device *adreno_dev;
 int status = -EINVAL;
-#if 0
 bool is_dt;
 
 is_dt = of_match_device(adreno_match_table, &pdev->dev);
@@ -1163,7 +1156,6 @@ status = adreno_of_get_pdata(pdev);
 if (status)
 goto error_return;
 }
-#endif
 
 device = (struct kgsl_device *)pdev->id_entry->driver_data;
 adreno_dev = ADRENO_DEVICE(device);
@@ -1189,9 +1181,7 @@ error_close_rb:
 adreno_ringbuffer_close(&adreno_dev->ringbuffer);
 error:
 device->parentdev = NULL;
-#if 0
 error_return:
-#endif
 return status;
 }
 

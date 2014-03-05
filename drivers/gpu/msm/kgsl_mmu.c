@@ -18,6 +18,7 @@
 #include <linux/slab.h>
 #include <linux/sched.h>
 #include <linux/iommu.h>
+#include <mach/iommu.h>
 #include <mach/socinfo.h>
 
 #include "kgsl.h"
