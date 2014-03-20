@@ -125,5 +125,8 @@ obj-$(CONFIG_EXOFS_FS)          += exofs/
 obj-$(CONFIG_CEPH_FS)		+= ceph/
 obj-$(CONFIG_PSTORE)		+= pstore/
 
+# DYNAMIC FSYNC
+obj-$(CONFIG_DYNAMIC_FSYNC)	+= dyn_sync_cntrl.o
+
 # Patched by YAFFS
 obj-$(CONFIG_YAFFS_FS)		+= yaffs2/
