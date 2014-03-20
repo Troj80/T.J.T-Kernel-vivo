@@ -1,0 +1,14 @@
+#!/bin/sh
+
+cp /Users/Troj80/gits/T.J.T-Kernel-vivo/arch/arm/boot/zImage /Users/Troj80/gits/T.J.T-Current/kernel
+cp /Users/Troj80/gits/T.J.T-Kernel-vivo/arch/arm/common/cpaccess.ko /Users/Troj80/gits/T.J.T-Current/system/lib/modules
+cp /Users/Troj80/gits/T.J.T-Kernel-vivo/arch/arm/mach-msm/reset_modem.ko /Users/Troj80/gits/T.J.T-Current/system/lib/modules
+cp /Users/Troj80/gits/T.J.T-Kernel-vivo/crypto/ansi_cprng.ko /Users/Troj80/gits/T.J.T-Current/system/lib/modules
+cp /Users/Troj80/gits/T.J.T-Kernel-vivo/drivers/crypto/msm/qce.ko /Users/Troj80/gits/T.J.T-Current/system/lib/modules
+cp /Users/Troj80/gits/T.J.T-Kernel-vivo/drivers/crypto/msm/qcedev.ko /Users/Troj80/gits/T.J.T-Current/system/lib/modules
+cp /Users/Troj80/gits/T.J.T-Kernel-vivo/drivers/crypto/msm/qcrypto.ko /Users/Troj80/gits/T.J.T-Current/system/lib/modules
+cp /Users/Troj80/gits/T.J.T-Kernel-vivo/drivers/net/tun.ko /Users/Troj80/gits/T.J.T-Current/system/lib/modules
+cp /Users/Troj80/gits/T.J.T-Kernel-vivo/drivers/net/wireless/bcmdhd/bcmdhd.ko /Users/Troj80/gits/T.J.T-Current/system/lib/modules
+cp /Users/Troj80/gits/T.J.T-Kernel-vivo/drivers/net/wireless/libra/librasdioif.ko /Users/Troj80/gits/T.J.T-Current/system/lib/modules
+cp /Users/Troj80/gits/T.J.T-Kernel-vivo/drivers/staging/ti-st/fm_drv.ko /Users/Troj80/gits/T.J.T-Current/system/lib/modules
+
