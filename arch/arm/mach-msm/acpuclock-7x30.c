@@ -57,7 +57,7 @@
 #define MAX_AXI_KHZ 192000
 
 #define ACPU_MIN_UV_MV 700U
-#define ACPU_MAX_UV_MV 1600U
+#define ACPU_MAX_UV_MV 1500U
 
 struct clock_state {
 	struct clkctl_acpu_speed	*current_speed;
