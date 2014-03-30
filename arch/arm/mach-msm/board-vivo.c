@@ -137,12 +137,6 @@ int htc_get_usb_accessory_adc_level(uint32_t *buffer);
 #define OPTNAV_IRQ		20
 #define OPTNAV_CHIP_SELECT	19
 
-#ifdef CONFIG_FB_MSM_TRIPLE_BUFFER
-#define MSM_FB_PRIM_BUF_SIZE   (864 * 480 * 4 * 3) /* 4bpp * 3 Pages */
-#else
-#define MSM_FB_PRIM_BUF_SIZE   (864 * 480 * 4 * 2) /* 4bpp * 2 Pages */
-#endif
-
 /* Macros assume PMIC GPIOs start at 0 */
 #define PM8058_GPIO_PM_TO_SYS(pm_gpio)     (pm_gpio + NR_GPIO_IRQS)
 #define PM8058_GPIO_SYS_TO_PM(sys_gpio)    (sys_gpio - NR_GPIO_IRQS)
@@ -1605,8 +1599,8 @@ static void Vivo_seccam_clk_switch(void){
 static struct camera_flash_cfg msm_camera_sensor_flash_cfg = {
 	.camera_flash = flashlight_control,
 	.num_flash_levels = FLASHLIGHT_NUM,
-	.low_temp_limit = 10,
-	.low_cap_limit = 15,
+	.low_temp_limit = 5,
+	.low_cap_limit = 1,
 };
 
 #ifdef CONFIG_S5K3H1GX
@@ -4093,7 +4087,7 @@ static struct platform_device *devices[] __initdata = {
 	/*&msm_device_ssbi6,*/
 	&msm_device_ssbi7,
 #endif
-	
+
 	&msm_migrate_pages_device,
 #ifdef CONFIG_MSM_ROTATOR
 	&msm_rotator_device,
