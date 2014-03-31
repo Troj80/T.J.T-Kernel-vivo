@@ -23,6 +23,10 @@
 #include <linux/leds-pm8058.h>
 #include <linux/wakelock.h>
 
+#ifdef CONFIG_TOUCHSCREEN_ATMEL_SWEEP2WAKE
+#include <linux/atmel_qt602240.h>
+#endif
+
 #ifdef CONFIG_HTC_HEADSET_MISC
 #include <mach/htc_headset_misc.h>
 #endif
@@ -734,6 +738,16 @@ static int pm8058_led_probe(struct platform_device *pdev)
 			goto err_register_attr_pwm_coefficient;
 		}
 	}
+
+#ifdef CONFIG_TOUCHSCREEN_ATMEL_SWEEP2WAKE
+	for (i = 0; i < pdata->num_leds; i++) {
+		if (!strcmp(pdata->led_config[i].name, "button-backlight-portrait")) {
+			sweep2wake_setleddev(&ldata[i].ldev);
+			printk(KERN_INFO "[TP]S2W: set led device %s, bank %d\n", pdata->led_config[i].name, ldata[i].bank);
+			break;
+		}
+	}
+#endif
 
 	return 0;
 
