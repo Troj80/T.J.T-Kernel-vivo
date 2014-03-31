@@ -2,7 +2,6 @@
 #define _LINUX_ATMEL_H
 
 #include <linux/bitops.h>
-
 #ifdef CONFIG_TOUCHSCREEN_ATMEL_SWEEP2WAKE
 #include <linux/input.h>
 #include <linux/leds-pm8058.h>
@@ -529,9 +528,7 @@ struct atmel_config_data {
 };
 
 #ifdef CONFIG_TOUCHSCREEN_ATMEL_SWEEP2WAKE
-extern void sweep2wake_setdev(struct input_dev * input_device);
-extern void sweep2wake_setleddev(struct led_classdev * led_dev);
+extern void sweep2wake_atmel_setdev(struct input_dev * input_device);
 #endif
 
 #endif
-
