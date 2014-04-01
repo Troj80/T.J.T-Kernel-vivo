@@ -3,11 +3,6 @@
 
 #include <linux/bitops.h>
 
-#ifdef CONFIG_TOUCHSCREEN_ATMEL_SWEEP2WAKE
-#include <linux/input.h>
-#include <linux/leds-pm8058.h>
-#endif
-
 #define ATMEL_QT602240_NAME "atmel_qt602240"
 #define ATMEL_MXT224E_NAME "atmel_mxt224e"
 
